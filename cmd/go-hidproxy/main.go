@@ -36,103 +36,168 @@ type InputMessage struct {
 }
 
 var Scancodes = map[uint16]uint16{
-	2:   30, // 1
-	3:   31, // 2
-	4:   32, // 3
-	5:   33, // 4
-	6:   34, // 5
-	7:   35, // 6
-	8:   36, // 7
-	9:   37, // 8
-	10:  38, // 9
-	11:  39, // 0
-	57:  44, // space
-	14:  42, // bkspc
-	28:  40, // enter
-	1:   41, // ESC
-	106: 79, // RIGHT
-	105: 80, // LEFT
-	108: 81, // DOWN
-	103: 82, // UP
-	59:  58, // F1
-	60:  59, // F2
-	61:  60, // F3
-	62:  61, // F4
-	63:  62, // F5
-	64:  63, // F6
-	65:  64, // F7
-	66:  65, // F8
-	67:  66, // F9
-	68:  67, // F10
-	69:  68, // F11
-	70:  69, // F12
-	12:  45, // -
-	13:  46, // =
-	15:  43, // TAB
-	26:  47, // {
-	27:  48, // ]
-	39:  51, // :
-	40:  52, // "
-	51:  54, // <
-	52:  55, // >
-	53:  56, // ?
-	41:  50, // //
-	43:  49, // \
-	30:  4,  // a
-	48:  5,  // b
-	46:  6,  // c
-	32:  7,  // d
-	18:  8,  // e
-	33:  9,  // f
-	34:  10, // g
-	35:  11, // h
-	23:  12, // i
-	36:  13, // j
-	37:  14, // k
-	38:  15, // l
-	50:  16, // m
-	49:  17, // n
-	24:  18, // o
-	25:  19, // p
-	16:  20, // q
-	19:  21, // r
-	31:  22, // s
-	20:  23, // t
-	22:  24, // u
-	47:  25, // v
-	17:  26, // w
-	45:  27, // x
-	21:  28, // y
-	44:  29, // z
-	86:  49, // | & \
-	104: 75, // PgUp
-	109: 78, // PgDn
-	102: 74, // Home
-	107: 77, // End
-	110: 73, // Insert
-	119: 72, // Pause
-	//70: 71, // ScrLk
-	99:  70,  // PrtSc
-	87:  68,  // F11
-	88:  69,  // F12
-	113: 127, // Mute
-	114: 129, // VolDn
-	115: 128, // VolUp
-	58:  57,  // CapsLock (non-locking)
-	158: 122, // "Undo" (Thinkpad special key)
-	159: 121, // "Again" (Thinkpad special key)
-	29:  224, // Left-Ctrl
-	125: 227, // Left-Cmd
-	42:  225, // Left-Shift
-	56:  226, // Left-Alt
-	100: 230, // AltGr (Right-Alt)
-	127: 231, // Right-Cmd
-	97:  228, // Right-Ctrl
-	54:  229, // Right-Shift
-	111: 76,  // Delete
-	164: 232, // Play-Pause
-	165: 234, // Previous-Track
-	163: 233, // Next-Track
+	1: 	41, // KEY_ESC
+	2: 	30, // KEY_1
+	3: 	31, // KEY_2
+	4: 	32, // KEY_3
+	5: 	33, // KEY_4
+	6: 	34, // KEY_5
+	7: 	35, // KEY_6
+	8: 	36, // KEY_7
+	9: 	37, // KEY_8
+	10: 	38, // KEY_9
+	11: 	39, // KEY_0
+	12: 	45, // KEY_MINUS
+	13: 	46, // KEY_EQUAL
+	14: 	42, // KEY_BACKSPACE
+	15: 	43, // KEY_TAB
+	16: 	20, // KEY_Q
+	17: 	26, // KEY_W
+	18: 	8, // KEY_E
+	19: 	21, // KEY_R
+	20: 	23, // KEY_T
+	21: 	28, // KEY_Y
+	22: 	24, // KEY_U
+	23: 	12, // KEY_I
+	24: 	18, // KEY_O
+	25: 	19, // KEY_P
+	26: 	47, // KEY_LEFTBRACE
+	27: 	48, // KEY_RIGHTBRACE
+	28: 	40, // KEY_ENTER
+	29: 	224, // KEY_LEFTCTRL
+	30: 	4, // KEY_A
+	31: 	22, // KEY_S
+	32: 	7, // KEY_D
+	33: 	9, // KEY_F
+	34: 	10, // KEY_G
+	35: 	11, // KEY_H
+	36: 	13, // KEY_J
+	37: 	14, // KEY_K
+	38: 	15, // KEY_L
+	39: 	51, // KEY_SEMICOLON
+	40: 	52, // KEY_APOSTROPHE
+	41: 	53, // KEY_GRAVE
+	42: 	225, // KEY_LEFTSHIFT
+	43: 	49, // KEY_BACKSLASH
+	44: 	29, // KEY_Z
+	45: 	27, // KEY_X
+	46: 	6, // KEY_C
+	47: 	25, // KEY_V
+	48: 	5, // KEY_B
+	49: 	17, // KEY_N
+	50: 	16, // KEY_M
+	51: 	54, // KEY_COMMA
+	52: 	55, // KEY_DOT
+	53: 	56, // KEY_SLASH
+	54: 	229, // KEY_RIGHTSHIFT
+	55: 	85, // KEY_KPASTERISK
+	56: 	226, // KEY_LEFTALT
+	57: 	44, // KEY_SPACE
+	58: 	57, // KEY_CAPSLOCK
+	59: 	58, // KEY_F1
+	60: 	59, // KEY_F2
+	61: 	60, // KEY_F3
+	62: 	61, // KEY_F4
+	63: 	62, // KEY_F5
+	64: 	63, // KEY_F6
+	65: 	64, // KEY_F7
+	66: 	65, // KEY_F8
+	67: 	66, // KEY_F9
+	68: 	67, // KEY_F10
+	69: 	83, // KEY_NUMLOCK
+	70: 	71, // KEY_SCROLLLOCK
+	71: 	95, // KEY_KP7
+	72: 	96, // KEY_KP8
+	73: 	97, // KEY_KP9
+	74: 	86, // KEY_KPMINUS
+	75: 	92, // KEY_KP4
+	76: 	93, // KEY_KP5
+	77: 	94, // KEY_KP6
+	78: 	87, // KEY_KPPLUS
+	79: 	89, // KEY_KP1
+	80: 	90, // KEY_KP2
+	81: 	91, // KEY_KP3
+	82: 	98, // KEY_KP0
+	83: 	99, // KEY_KPDOT
+	85: 	148, // KEY_ZENKAKUHANKAKU
+	86: 	100, // KEY_102ND
+	87: 	68, // KEY_F11
+	88: 	69, // KEY_F12
+	89: 	135, // KEY_RO
+	90: 	146, // KEY_KATAKANA
+	91: 	147, // KEY_HIRAGANA
+	92: 	138, // KEY_HENKAN
+	93: 	136, // KEY_KATAKANAHIRAGANA
+	94: 	139, // KEY_MUHENKAN
+	95: 	140, // KEY_KPJPCOMMA
+	96: 	88, // KEY_KPENTER
+	97: 	228, // KEY_RIGHTCTRL
+	98: 	84, // KEY_KPSLASH
+	99: 	70, // KEY_SYSRQ
+	100: 	230, // KEY_RIGHTALT
+	102: 	74, // KEY_HOME
+	103: 	82, // KEY_UP
+	104: 	75, // KEY_PAGEUP
+	105: 	80, // KEY_LEFT
+	106: 	79, // KEY_RIGHT
+	107: 	77, // KEY_END
+	108: 	81, // KEY_DOWN
+	109: 	78, // KEY_PAGEDOWN
+	110: 	73, // KEY_INSERT
+	111: 	76, // KEY_DELETE
+	113: 	127, // KEY_MUTE
+	114: 	129, // KEY_VOLUMEDOWN
+	115: 	128, // KEY_VOLUMEUP
+	116: 	102, // KEY_POWER
+	117: 	103, // KEY_KPEQUAL
+	119: 	72, // KEY_PAUSE
+	121: 	133, // KEY_KPCOMMA
+	122: 	144, // KEY_HANGEUL
+	123: 	145, // KEY_HANJA
+	124: 	137, // KEY_YEN
+	125: 	227, // KEY_LEFTMETA
+	126: 	231, // KEY_RIGHTMETA
+	127: 	101, // KEY_COMPOSE
+	128: 	120, // KEY_STOP
+	129: 	121, // KEY_AGAIN
+	130: 	118, // KEY_PROPS
+	131: 	122, // KEY_UNDO
+	132: 	119, // KEY_FRONT
+	133: 	124, // KEY_COPY
+	134: 	116, // KEY_OPEN
+	135: 	125, // KEY_PASTE
+	136: 	126, // KEY_FIND
+	137: 	123, // KEY_CUT
+	138: 	117, // KEY_HELP
+	140: 	251, // KEY_CALC
+	142: 	248, // KEY_SLEEP
+	150: 	240, // KEY_WWW
+	152: 	249, // KEY_COFFEE
+	158: 	241, // KEY_BACK
+	159: 	242, // KEY_FORWARD
+	161: 	236, // KEY_EJECTCD
+	163: 	235, // KEY_NEXTSONG
+	164: 	232, // KEY_PLAYPAUSE
+	165: 	234, // KEY_PREVIOUSSONG
+	166: 	233, // KEY_STOPCD
+	173: 	250, // KEY_REFRESH
+	176: 	247, // KEY_EDIT
+	177: 	245, // KEY_SCROLLUP
+	178: 	246, // KEY_SCROLLDOWN
+	179: 	182, // KEY_KPLEFTPAREN
+	180: 	183, // KEY_KPRIGHTPAREN
+	183: 	104, // KEY_F13
+	184: 	105, // KEY_F14
+	185: 	106, // KEY_F15
+	186: 	107, // KEY_F16
+	187: 	108, // KEY_F17
+	188: 	109, // KEY_F18
+	189: 	110, // KEY_F19
+	190: 	111, // KEY_F20
+	191: 	112, // KEY_F21
+	192: 	113, // KEY_F22
+	193: 	114, // KEY_F23
+	194: 	115, // KEY_F24
 }
 
 const (
@@ -151,36 +216,46 @@ const (
 )
 
 func SetupUSBGadget() {
+	const gadget string = "g1" // name of  usb_gadget
+	var basepath string = "/sys/kernel/config/usb_gadget/"+gadget
 	var paths = []string{
-		"/sys/kernel/config/usb_gadget/piproxy",
-		"/sys/kernel/config/usb_gadget/piproxy/strings/0x409",
-		"/sys/kernel/config/usb_gadget/piproxy/configs/c.1/strings/0x409",
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0",
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1",
+		basepath,
+		basepath+"/strings/0x409",
+		basepath+"/configs/c.1/strings/0x409",
+		basepath+"/functions/hid.usb0",
+		basepath+"/functions/hid.usb1",
+		basepath+"/os_desc",
 	}
 	filesStr := orderedmap.New()
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/idVendor", "0x1d6b")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/idProduct", "0x0104")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/bcdDevice", "0x0100")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/bcdUSB", "0x0200")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/strings/0x409/serialnumber", "fedcba9876543210")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/strings/0x409/manufacturer", "Raspberry Pi")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/strings/0x409/product", "pizero keyboard Device")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/configs/c.1/strings/0x409/configuration", "Config 1: ECM network")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/configs/c.1/MaxPower", "250")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0/protocol", "1")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0/subclass", "1")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0/report_length", "8")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1/protocol", "2")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1/subclass", "1")
-	filesStr.Set("/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1/report_length", "4")
+	filesStr.Set(basepath+"/idVendor", "0x1d6b") 	//Linux Foundation
+	filesStr.Set(basepath+"/idProduct", "0x0104")	//Multifunction Composite Gadget
+	filesStr.Set(basepath+"/bcdDevice", "0x0100")
+	filesStr.Set(basepath+"/bcdDevice", "0x0100")
+	filesStr.Set(basepath+"/bcdUSB", "0x0200")
+	filesStr.Set(basepath+"/bDeviceClass", "0xEF")
+	filesStr.Set(basepath+"/bDeviceSubClass", "0x02")
+	filesStr.Set(basepath+"/bDeviceProtocol", "0x01")
+	filesStr.Set(basepath+"/os_desc/use", "1")
+	filesStr.Set(basepath+"/os_desc/b_vendor_code", "0x01")
+	filesStr.Set(basepath+"/os_desc/qw_sign", "MSFT100")
+	filesStr.Set(basepath+"/strings/0x409/serialnumber", "00100")
+	filesStr.Set(basepath+"/strings/0x409/manufacturer", "Linux Foundation")
+	filesStr.Set(basepath+"/strings/0x409/product", "Multifunction Composite Gadget")
+	filesStr.Set(basepath+"/configs/c.1/strings/0x409/configuration", "Config 1: USB Gadget")
+	filesStr.Set(basepath+"/configs/c.1/MaxPower", "250")
+	filesStr.Set(basepath+"/functions/hid.usb0/protocol", "1")
+	filesStr.Set(basepath+"/functions/hid.usb0/subclass", "1")
+	filesStr.Set(basepath+"/functions/hid.usb0/report_length", "8")
+	filesStr.Set(basepath+"/functions/hid.usb1/protocol", "2")
+	filesStr.Set(basepath+"/functions/hid.usb1/subclass", "1")
+	filesStr.Set(basepath+"/functions/hid.usb1/report_length", "4")
 	var filesBytes = map[string][]byte{
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0/report_desc": []byte{0x05, 0x01, 0x09, 0x06, 0xa1, 0x01, 0x05, 0x07, 0x19, 0xe0, 0x29, 0xe7, 0x15, 0x00, 0x25, 0x01, 0x75, 0x01, 0x95, 0x08, 0x81, 0x02, 0x95, 0x01, 0x75, 0x08, 0x81, 0x03, 0x95, 0x05, 0x75, 0x01, 0x05, 0x08, 0x19, 0x01, 0x29, 0x05, 0x91, 0x02, 0x95, 0x01, 0x75, 0x03, 0x91, 0x03, 0x95, 0x06, 0x75, 0x08, 0x15, 0x00, 0x25, 0x65, 0x05, 0x07, 0x19, 0x00, 0x29, 0x65, 0x81, 0x00, 0xc0},
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1/report_desc": []byte{0x05, 0x01, 0x09, 0x02, 0xa1, 0x01, 0x09, 0x01, 0xa1, 0x00, 0x05, 0x09, 0x19, 0x01, 0x29, 0x05, 0x15, 0x00, 0x25, 0x01, 0x95, 0x05, 0x75, 0x01, 0x81, 0x02, 0x95, 0x01, 0x75, 0x03, 0x81, 0x01, 0x05, 0x01, 0x09, 0x30, 0x09, 0x31, 0x09, 0x38, 0x15, 0x81, 0x25, 0x7f, 0x75, 0x08, 0x95, 0x03, 0x81, 0x06, 0xc0, 0xc0},
+		basepath+"/functions/hid.usb0/report_desc": []byte{0x05, 0x01, 0x09, 0x06, 0xa1, 0x01, 0x05, 0x07, 0x19, 0xe0, 0x29, 0xe7, 0x15, 0x00, 0x25, 0x01, 0x75, 0x01, 0x95, 0x08, 0x81, 0x02, 0x95, 0x01, 0x75, 0x08, 0x81, 0x03, 0x95, 0x05, 0x75, 0x01, 0x05, 0x08, 0x19, 0x01, 0x29, 0x05, 0x91, 0x02, 0x95, 0x01, 0x75, 0x03, 0x91, 0x03, 0x95, 0x06, 0x75, 0x08, 0x15, 0x00, 0x25, 0x65, 0x05, 0x07, 0x19, 0x00, 0x29, 0x65, 0x81, 0x00, 0xc0},
+		basepath+"/functions/hid.usb1/report_desc": []byte{0x05, 0x01, 0x09, 0x02, 0xa1, 0x01, 0x09, 0x01, 0xa1, 0x00, 0x05, 0x09, 0x19, 0x01, 0x29, 0x05, 0x15, 0x00, 0x25, 0x01, 0x95, 0x05, 0x75, 0x01, 0x81, 0x02, 0x95, 0x01, 0x75, 0x03, 0x81, 0x01, 0x05, 0x01, 0x09, 0x30, 0x09, 0x31, 0x09, 0x38, 0x15, 0x81, 0x25, 0x7f, 0x75, 0x08, 0x95, 0x03, 0x81, 0x06, 0xc0, 0xc0},
 	}
 	var symlinks = map[string]string{
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb0": "/sys/kernel/config/usb_gadget/piproxy/configs/c.1/hid.usb0",
-		"/sys/kernel/config/usb_gadget/piproxy/functions/hid.usb1": "/sys/kernel/config/usb_gadget/piproxy/configs/c.1/hid.usb1",
+		basepath+"/functions/hid.usb0": basepath+"/configs/c.1/hid.usb0",
+		basepath+"/functions/hid.usb1": basepath+"/configs/c.1/hid.usb1",
 	}
 
 	for _, path := range paths {
@@ -238,7 +313,7 @@ func SetupUSBGadget() {
 	if err != nil {
 		log.Fatalf("Failed to list files in /sys/class/udc: %s", err.Error())
 	}
-	var udcFile string = "/sys/kernel/config/usb_gadget/piproxy/UDC"
+	var udcFile string = basepath+"/UDC"
 	var udc string = ""
 	for _, match := range matches {
 		udc = udc + filepath.Base(match) + " "
@@ -615,7 +690,7 @@ func GetDisconnectedDevices(adapterId string) ([]string, error) {
 
 func main() {
 	var wg sync.WaitGroup
-	logLevelPtr := flag.String("loglevel", "info", "log level (panic, fatal, error, warn, info, debug, trace)")
+	logLevelPtr := flag.String("loglevel", "warn", "log level (panic, fatal, error, warn, info, debug, trace)")
 	setupHid := flag.Bool("setuphid", true, "setup HID files on startup")
 	setupMouse := flag.Bool("mouse", true, "setup mouse(s)")
 	setupKeyboard := flag.Bool("keyboard", true, "setup keyboard(s)")
@@ -686,7 +761,7 @@ func main() {
 		default:
 		}
 
-		log.Info("Polling for new devices in /dev/input\n")
+		//log.Debugf("Polling for new devices in /dev/input")
 		devices, _ := evdev.ListInputDevices()
 		for _, dev := range devices {
 			isMouse := false
