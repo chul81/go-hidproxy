@@ -521,7 +521,7 @@ func HandleMouse(output chan<- error, input chan<- InputMessage, close <-chan bo
 					mouseToSend = append(mouseToSend, uint8(event.Value))
 					mouseToSend = append(mouseToSend, 0x00)
 				}
-				if event.Code == 11 {
+				if event.Code == 8 {
 					mouseToSend = append(mouseToSend, 0x00)
 					mouseToSend = append(mouseToSend, 0x00)
 					mouseToSend = append(mouseToSend, uint8(event.Value))
