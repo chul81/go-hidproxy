@@ -213,6 +213,8 @@ const (
 	BUTTON_LEFT   = 1 << 0
 	BUTTON_RIGHT  = 1 << 1
 	BUTTON_MIDDLE = 1 << 2
+	BUTTON_SIDE   = 1 << 3
+	BUTTON_EXTRA  = 1 << 4
 )
 
 func SetupUSBGadget() {
@@ -229,7 +231,6 @@ func SetupUSBGadget() {
 	filesStr := orderedmap.New()
 	filesStr.Set(basepath+"/idVendor", "0x1d6b") 	//Linux Foundation
 	filesStr.Set(basepath+"/idProduct", "0x0104")	//Multifunction Composite Gadget
-	filesStr.Set(basepath+"/bcdDevice", "0x0100")
 	filesStr.Set(basepath+"/bcdDevice", "0x0100")
 	filesStr.Set(basepath+"/bcdUSB", "0x0200")
 	filesStr.Set(basepath+"/bDeviceClass", "0xEF")
@@ -506,6 +507,22 @@ func HandleMouse(output chan<- error, input chan<- InputMessage, close <-chan bo
 				}
 				buttonOp = true
 			}
+			if event.Code == 275 {
+                                if event.Value > 0 {
+                                        buttons |= BUTTON_SIDE
+                                } else {
+                                        buttons &= ^uint8(BUTTON_SIDE)
+                                }
+                                buttonOp = true
+                        }
+			if event.Code == 276 {
+                                if event.Value > 0 {
+                                        buttons |= BUTTON_EXTRA
+                                } else {
+                                        buttons &= ^uint8(BUTTON_EXTRA)
+                                }
+                                buttonOp = true
+                        }
 		}
 		if event.Type == evdev.EV_REL || buttonOp {
 			mouseToSend := make([]uint8, 0)
